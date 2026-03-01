@@ -35,7 +35,6 @@ export default function TempConverterPage() {
         farenheitValue = String(Math.round(converted * 100) / 100);
     }
 
-
     function handleCelsiusChange(newValue: string): void {
         setActiveScale('celsius');
         setTemperature(newValue)
