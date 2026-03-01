@@ -5,6 +5,7 @@ import TempConverterPage from "./pages/TempConverterPage"
 
 
 export default function App(){
+  return (
   <div className="min-h-screen bg-purple-50">
     <Navabr />
     <Routes>
@@ -14,4 +15,5 @@ export default function App(){
     </Routes>
 
   </div>
+  );
 }
