@@ -1,4 +1,5 @@
 export default function TeamDirectoryPage(){
+    return(
     <div className="p-8">
     
       <h1 className="text-2xl font-bold text-purple-600">Employes</h1>
@@ -6,5 +7,5 @@ export default function TeamDirectoryPage(){
 
       
     </div>
-    
+    );
 }

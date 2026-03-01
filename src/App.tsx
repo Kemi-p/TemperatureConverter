@@ -6,6 +6,7 @@ import TempConverterPage from "./pages/TempConverterPage"
 
 export default function App(){
   <div className="min-h-screen bg-purple-50">
+    <Navabr />
     <Routes>
       <Route path="/" element={<TempConverterPage />} />
       <Route path="/team" element={<TeamDirectoryPage />} />
