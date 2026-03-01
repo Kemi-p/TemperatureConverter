@@ -60,7 +60,7 @@ export default function TempConverterPage() {
                 />
 
                 <TemperatureInput
-                label="Celcius (°F)"
+                label="Fahrenheit (°F)"
                 value= {farenheitValue}
                 unit="celsius"
                 onTemperatureChange={handleFarenheitChange}

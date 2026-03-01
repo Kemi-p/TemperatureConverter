@@ -14,7 +14,7 @@ export default function EmployeeList({ filteredEmployees }: EmployeeListProps) {
       {filteredEmployees.map((employee: Employee) => (
         <li
           key={employee.id}
-          className="bg-white border border-purple-200 rounded-md p-3"
+          className="bg-purple-50 p-3"
         >
           <p className="text-purple-700 font-semibold">{employee.name}</p>
           <p className="text-purple-500 text-sm">{employee.role} — {employee.department}</p>
