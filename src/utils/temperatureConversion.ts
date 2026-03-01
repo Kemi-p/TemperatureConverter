@@ -14,11 +14,11 @@ export function Convert(
 ) : number {
     if (fromUnit === toUnit) return value;
 
-    if (fromUnit === 'celcius' && toUnit === 'farenheit'){
+    if (fromUnit === 'celsius' && toUnit === 'farenheit'){
         return ((value * (9/5)) +32);
     }
 
-    if (fromUnit === 'farenheit' && toUnit === "celcius"){
+    if (fromUnit === 'farenheit' && toUnit === "celsius"){
         return ((value - 32) * (5/9));
     }
 
