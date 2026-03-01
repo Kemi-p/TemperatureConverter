@@ -6,3 +6,10 @@ export type Temperature ={
     value: number,
     symbol: string
 }
+
+export type Employee ={
+    id:number,
+    name: string,
+    role:string,
+    department:string
+}
