@@ -4,6 +4,15 @@ A React + TypeScript application built to practice core React concepts including
 
 ---
 
+#Preview
+![App screenshot](src/assets/TempConvertorPage.png)
+![App screenshot](src/assets/ShowTeamPage.png)
+![App screenshot](src/assets/ShowFilter.png)
+
+
+
+---
+
 ## Features
 
 - Convert between Celsius and Fahrenheit in real time
