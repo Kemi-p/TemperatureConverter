@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
+# Temperature Converter App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript application built to practice core React concepts including lifting state up, controlled components, derived values, routing, and API integration.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#Preview
+![App screenshot](src/assets/TempConvertorPage.png)
+![App screenshot](src/assets/ShowTeamPage.png)
+![App screenshot](src/assets/ShowFilter.png)
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Convert between Celsius and Fahrenheit in real time
+- Fetch the current temperature of any city using the OpenWeatherMap API
+- Team directory with search filtering
+- Routing with a navbar
+- Built with React, TypeScript, Vite, and Tailwind CSS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project Structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+​```
+src/
+  components/
+    Navbar.tsx              # Navigation bar with links to both pages
+    TemperatureInput.tsx    # Reusable controlled input component
+    SearchBox.tsx           # Reusable search input for the directory
+    EmployeeList.tsx        # Displays the filtered list of employees
+  pages/
+    TemperatureConverterPage.tsx   # Temperature converter with API city search
+    EmployeesPage.tsx              # Team directory with search filtering
+  types/
+    temperature.ts          # Shared TypeScript types for the whole app
+  utils/
+    temperatureConversions.ts  # Single convert() function for all conversions
+  App.tsx                   # Root component with routing
+  main.tsx                  # Entry point, wraps app in BrowserRouter
+​```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Key Concepts Practiced
+
+### Lifting State Up
+State lives in the parent page component. Child components like `TemperatureInput`, `SearchBox`, and `EmployeeList` hold no state of their own. They receive values via props and communicate back to the parent via callback functions.
+
+### Controlled Components
+Every input in the app has its value driven by React state. The input never manages itself — the parent always decides what it displays.
+
+### Derived Values
+`celsiusValue`, `fahrenheitValue`, and `filteredEmployees` are never stored in state. They are computed during every render from the existing state. This keeps a single source of truth and prevents the UI from ever going out of sync.
+
+### Single Source of Truth
+Only `temperature` and `activeScale` are stored for the converter. Only `searchQuery` is stored for the directory. Everything else flows from those.
+
+### Open/Closed Principle
+The `convert()` ulitilyfunction is written so that adding a new unit like Kelvin only requires adding new cases inside that one function. No other file needs to change.
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js
+- An API key from [OpenWeatherMap](https://openweathermap.org/)
+
+### Installation
+
+​```bash
+git clone https://github.com/grad-program-projects/TemperatureConverter.git
+cd temperature-converter
+npm install
+​```
+
+### Environment Variables
+
+Create a `.env` file in the root of the project:
+
+​```
+VITE_OPENWEATHER_API_KEY=your_api_key_here
+​```
+
+> Never commit your `.env` file. It is already listed in `.gitignore`.
+
+### Running the App
+
+​```bash
+npm run dev
+​```
+
+---
+
+## Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| React | UI library |
+| TypeScript | Type safety |
+| Vite | Build tool and dev server |
+| Tailwind CSS | Styling |
+| React Router | Client-side routing |
+| OpenWeatherMap API | Live weather data |
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `VITE_OPENWEATHER_API_KEY` | Your OpenWeatherMap API key |
