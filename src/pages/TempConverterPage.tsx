@@ -58,7 +58,6 @@ export default function TempConverterPage() {
         try{
             const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
              const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`)
-            //const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=62977446f5c98affb309e01cc44366e5`)
 
             if (!response.ok) {
                 setErrorMessage("City not found. Try agian");
