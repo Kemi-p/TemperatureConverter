@@ -29,8 +29,8 @@ export default function TempConverterPage() {
     } else {
         const converted = Convert(
             parseFloat(temperature),
-            "farenheit",
-            "celsius"
+            "celsius",
+            "farenheit"
         );
         farenheitValue = String(Math.round(converted * 100) / 100);
     }

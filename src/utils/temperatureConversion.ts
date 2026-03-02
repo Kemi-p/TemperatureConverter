@@ -15,7 +15,7 @@ export function Convert(
     if (fromUnit === toUnit) return value;
 
     if (fromUnit === 'celsius' && toUnit === 'farenheit'){
-        return ((value * (9/5)) +32);
+        return ((value * 9/5) +32);
     }
 
     if (fromUnit === 'farenheit' && toUnit === "celsius"){
