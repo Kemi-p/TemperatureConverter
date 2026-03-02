@@ -10,8 +10,6 @@ export default function Navabr(){
              <Link to="/team" className="text-purple-600 font-bold hover:text-purple-400">
             Team Directory
             </Link>
-
-
         </nav>
     );
 }
