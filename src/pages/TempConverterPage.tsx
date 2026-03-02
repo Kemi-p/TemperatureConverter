@@ -6,6 +6,10 @@ export default function TempConverterPage() {
     const [temperature, setTemperature] = useState<string>("");
     const [activeScale, setActiveScale] = useState<"celsius" | "farenheit">("celsius")
 
+    const [cityName, setCityName]= useState<string>("");
+    const [isLoading, setIsLoading]= useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+
     let celsiusValue: string;
 
     if (activeScale === "celsius") {
@@ -44,6 +48,38 @@ export default function TempConverterPage() {
         setActiveScale('farenheit');
         setTemperature(newValue)
     }
+
+    async function fetchWeatherForCity():Promise<void> {
+        if (cityName.trim() === "" )return;
+        console.log(import.meta.env.VITE_OPENWEATHER_API_KEY);
+        setIsLoading(true);
+        setErrorMessage("");
+
+        try{
+            const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
+             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`)
+            //const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=62977446f5c98affb309e01cc44366e5`)
+
+            if (!response.ok) {
+                setErrorMessage("City not found. Try agian");
+                return;
+                
+            }
+
+            const data = await response.json();
+            const currentTemp: number = data.main.temp;
+
+            setActiveScale("celsius");
+            setTemperature(String(currentTemp));
+        }catch(error){
+            setErrorMessage("Somethng went wrong. Try again")
+        }finally{
+            setIsLoading(false)
+        }
+
+        
+    }
+
     return (
         <div className="flex justify-center items-center min-h-[calc(100vh-56px)]">
 
@@ -51,6 +87,27 @@ export default function TempConverterPage() {
                 <h1 className="text-2xl font-bold text-purple-700 text-center">
                     Temperature Converter
                 </h1>
+
+                {/** weather sec */}
+                <label>Fetch by city</label>
+                <input
+                type="text"
+                value={cityName}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCityName(event.target.value)}
+                placeholder="Enter city name"
+                />
+
+                <button 
+                onClick={fetchWeatherForCity}
+                disabled={isLoading}
+                >
+                    {isLoading ? "Fetching.." : "Get temperature"}
+                    
+                </button>
+                {errorMessage !== "" && (
+                    <p>{errorMessage}</p>
+                )}
+                {/**================= */}
 
                 <TemperatureInput
                 label="Celcius (°C)"
